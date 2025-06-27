@@ -1,4 +1,4 @@
-import { FeedbackType } from '@/generated/prisma';
+import { FeedbackType, Role } from '@/generated/prisma';
 
 export interface UserResponse {
 	totalRatings: number;
@@ -9,9 +9,7 @@ export interface UserResponse {
 	id: string;
 	username: string;
 	password: string;
-	role: AdminOrUser;
+	role: Role;
 	createdAt: Date;
 	updatedAt: Date | null;
 }
-
-export type AdminOrUser = 'admin' | 'user';

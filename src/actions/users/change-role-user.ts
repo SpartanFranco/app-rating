@@ -14,7 +14,8 @@ export const changeUserRole = async ({ userId, role }: UserData) => {
 		await validateAdminOrSuperAdmin(['superAdmin']);
 		const user = await prisma.user.findFirst({ where: { id: userId } });
 		if (!user) throw new Error('El usuario no existe');
-
+		if (user.role === role)
+			throw new Error(`EL usuario ${user.username} ya tiene ese role`);
 		await prisma.user.update({ where: { id: userId }, data: { role } });
 		return {
 			ok: true,
